@@ -1,32 +1,73 @@
 
 import Spline from "@splinetool/react-spline/next";
 import TextTyping from "@/components/_comp-project/typing-animation";
-import { SmoothCursor } from "@/components/ui/smooth-cursor"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 import ExperienceTimeline from "@/components/_comp-project/academyc-progressor";
+import FluxProjects from "@/components/_comp-project/flux-projects";
+import SkillsComp from "@/components/_comp-project/skills";
+import Navbar from "@/components/_comp-project/navbar";
+import FooterDock from "@/components/_comp-project/footer-dock";
+import ContactForm from "@/components/_comp-project/contact-form";
 
 export default function Home() {
   return (
-    <>
-  <div className="relative h-screen w-full">
-    <ScrollProgress className="bg-[#fff]"/>
-    {/* <SmoothCursor></SmoothCursor> */}
-    {/* Background */}
-    <Spline scene="https://prod.spline.design/ag6bbUIBZELh10i5/scene.splinecode" />
+    <div className="relative min-h-screen w-full">
+      <ScrollProgress className="bg-white" />
+      <Navbar />
 
-      <TextTyping></TextTyping>
-    </div>
-    <div className="w-full p-4 flex flex-col space-y-3 bg-zinc-900 text-zinc-200 py-15 ">
-      <h2 className="ml-35 text-2xl font-bold">Sobre mim</h2>
-      <div className="w-[80%] mx-auto">
-      <p className="text-wrap break-after-auto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem tempora totam aliquid, quia voluptas molestias maiores necessitatibus vel illum nisi officia qui beatae. Architecto necessitatibus maiores, quia vitae dolorem cupiditate voluptatem accusamus, doloremque eveniet, inventore esse ea rem. Totam minus facilis eligendi laudantium. Maiores esse consectetur, illo ut officia, doloribus sunt nisi provident est necessitatibus obcaecati, labore iusto eligendi numquam aliquam laborum. Distinctio modi possimus rerum, sint reiciendis dolorum, adipisci iste in molestias minus, omnis maxime velit? Sit numquam maxime nemo rerum possimus enim iste ipsam laudantium error vero, in cumque suscipit asperiores quidem aut aperiam hic dolor, ad repudiandae natus non illum voluptatem rem cum. Perspiciatis animi blanditiis ducimus repellat ipsum assumenda dolorem, vitae tempora neque ad saepe nisi ea harum aperiam consectetur porro voluptatibus, aut maiores fugiat expedita minima. Cumque fugiat, fuga vitae neque nesciunt labore aspernatur rerum ratione amet dolor omnis rem.</p>
+      {/* Hero / Spline Background */}
+      <section id="hero">
+        <Spline scene="https://prod.spline.design/ag6bbUIBZELh10i5/scene.splinecode" />
+        <TextTyping />
+      </section>
+
+      {/* Content */}
+      <div className="bg-linear-to-b from-black to-zinc-800">
+        {/* Sobre mim */}
+        <section id="sobre" className="mx-auto w-full max-w-5xl space-y-6 px-6 py-24 sm:px-10 md:px-16">
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-100">
+            Sobre <span className="text-zinc-500">mim</span>
+          </h2>
+          <div className="space-y-4 text-base leading-relaxed text-zinc-400">
+            <p>
+              Sou desenvolvedor com foco em <span className="text-zinc-200">Java</span> e ecossistema <span className="text-zinc-200">Spring</span>, com experiência real em
+              construção de APIs REST, microsserviços e mensageria com RabbitMQ. Também atuo no frontend com
+              <span className="text-zinc-200"> Next.js</span> e <span className="text-zinc-200">TypeScript</span>, criando sistemas internos completos para empresas — automação de processos,
+              integrações com IA e consumo de APIs externas.
+            </p>
+            <p>
+              Na área de dados, desenvolvi um modelo de <span className="text-zinc-200">Machine Learning</span> durante a iniciação científica para
+              predição de ataques web, classificando ameaças como SQL Injection e SSH brute-force com retorno de
+              probabilidade por categoria. Trabalho com <span className="text-zinc-200">Python</span>, NumPy, Pandas e análise estatística.
+            </p>
+            <p>
+              Tenho experiência com <span className="text-zinc-200">Docker</span> para containerização, <span className="text-zinc-200">AWS</span> (EC2, S3, RDS) em produção
+              e práticas de arquitetura — modelagem UML, versionamento com Git e organização ágil com Trello.
+              Atualmente cursando Análise e Desenvolvimento de Sistemas, sempre buscando evolução constante.
+            </p>
+          </div>
+        </section>
+
+        <section id="skills" className="py-10">
+          <SkillsComp />
+        </section>
+
+        {/* Timeline */}
+        <section id="jornada" className="py-10">
+          <ExperienceTimeline />
+        </section>
+
+        {/* Projetos */}
+        <section id="projetos" className="py-10">
+          <FluxProjects />
+        </section>
+
+        {/* Contato */}
+        <ContactForm />
+
+        {/* Footer */}
+        <FooterDock />
       </div>
     </div>
-
-    <div>
-      <ExperienceTimeline></ExperienceTimeline>
-    </div>
-
-</>
   );
 }

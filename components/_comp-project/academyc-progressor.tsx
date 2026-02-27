@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { cn } from "@/lib/utils"
 
 interface TimelineItem {
   year: string
@@ -63,16 +64,14 @@ const timelineData: TimelineItem[] = [
 ]
 
 const typeConfig = {
-  academic:     { label: "Acadêmico",   color: "#e4e4e7" },
-  professional: { label: "Profissional", color: "#a1a1aa" },
-  personal:     { label: "Pessoal",     color: "#71717a" },
+  academic:     { label: "Acadêmico",   icon: "🎓" },
+  professional: { label: "Profissional", icon: "💼" },
+  personal:     { label: "Pessoal",     icon: "🚀" },
 }
 
 export default function ExperienceTimeline() {
   const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set())
-  const [lineProgress, setLineProgress] = useState(0)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
-  const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -82,218 +81,111 @@ export default function ExperienceTimeline() {
           if (entry.isIntersecting) {
             setTimeout(() => {
               setVisibleItems((prev) => new Set([...prev, index]))
-            }, index * 120)
+            }, index * 100)
           }
         })
       },
-      { threshold: 0.25, rootMargin: "0px 0px -80px 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
     )
     itemRefs.current.forEach((ref) => ref && observer.observe(ref))
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return
-      const rect = sectionRef.current.getBoundingClientRect()
-      const sectionHeight = sectionRef.current.offsetHeight
-      const windowH = window.innerHeight
-      const scrolled = Math.max(0, windowH - rect.top)
-      const progress = Math.min(1, scrolled / (sectionHeight + windowH * 0.3))
-      setLineProgress(progress)
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        background: "#18181b",
-        padding: "100px 0 120px",
-        position: "relative",
-        fontFamily: "'DM Sans', 'Sora', sans-serif",
-      }}
-    >
+    <section className="relative py-24">
       {/* Header */}
-      <div style={{ maxWidth: 900, margin: "0 auto 80px", padding: "0 40px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 12 }}>
-          <div style={{ width: 36, height: 1, background: "linear-gradient(90deg, transparent, #3f3f46)" }} />
-          <span style={{ fontSize: 11, letterSpacing: "0.25em", color: "#3f3f46", textTransform: "uppercase", fontWeight: 500 }}>
-            Jornada
-          </span>
-        </div>
-
-        <h2 style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)", fontWeight: 800, color: "#fafafa", margin: 0, lineHeight: 1.1, letterSpacing: "-0.03em" }}>
+      <div className="mx-auto mb-14 max-w-5xl px-6 sm:px-10 md:px-16">
+        <h2 className="text-3xl font-bold leading-tight tracking-tight text-zinc-100">
           Progresso &{" "}
-          <span style={{ color: "#52525b" }}>Experiências</span>
+          <span className="text-zinc-500">Experiências</span>
         </h2>
-
-        {/* Legend */}
-        <div style={{ display: "flex", gap: 24, marginTop: 24, flexWrap: "wrap" }}>
-          {Object.entries(typeConfig).map(([key, cfg]) => (
-            <div key={key} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#52525b" }}>
-              <div style={{ width: 6, height: 6, borderRadius: "50%", background: cfg.color }} />
-              {cfg.label}
-            </div>
-          ))}
-        </div>
       </div>
 
-      {/* Timeline container */}
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 40px", position: "relative" }}>
+      {/* Cards — zigzag */}
+      <div className="mx-auto flex max-w-5xl flex-col gap-10 px-6 sm:px-10 md:px-16">
+        {timelineData.map((item, i) => {
+          const cfg = typeConfig[item.type]
+          const isVisible = visibleItems.has(i)
+          const isLeft = i % 2 === 0
 
-        {/* Line track */}
-        <div style={{
-          position: "absolute",
-          left: "calc(40px + 28px)",
-          top: 0, bottom: 0,
-          width: 1,
-          background: "rgba(255,255,255,0.05)",
-        }} />
-
-        {/* Animated fill */}
-        <div style={{
-          position: "absolute",
-          left: "calc(40px + 28px)",
-          top: 0,
-          width: 1,
-          height: `${lineProgress * 100}%`,
-          background: "linear-gradient(180deg, #a1a1aa 0%, #3f3f46 100%)",
-          transition: "height 0.05s linear",
-        }} />
-
-        {/* Items */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {timelineData.map((item, i) => {
-            const cfg = typeConfig[item.type]
-            const isVisible = visibleItems.has(i)
-
-            return (
-              <div
-                key={i}
-                ref={(el) => { itemRefs.current[i] = el }}
-                data-index={i}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 32,
-                  paddingBottom: i < timelineData.length - 1 ? 52 : 0,
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? "translateX(0)" : "translateX(-20px)",
-                  transition: "opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
-                }}
-              >
-                {/* Node column */}
-                <div style={{ flexShrink: 0, width: 58, display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 4, gap: 6 }}>
-                  <div style={{
-                    width: 14,
-                    height: 14,
-                    borderRadius: "50%",
-                    background: "#18181b",
-                    border: `1.5px solid ${cfg.color}`,
-                    position: "relative",
-                    zIndex: 2,
-                  }}>
-                    {isVisible && (
-                      <div style={{
-                        position: "absolute",
-                        inset: -5,
-                        borderRadius: "50%",
-                        border: `1px solid ${cfg.color}`,
-                        opacity: 0,
-                        animation: "pulse-ring 3s ease-out infinite",
-                        animationDelay: `${i * 0.4}s`,
-                      }} />
-                    )}
+          return (
+            <div
+              key={i}
+              ref={(el) => { itemRefs.current[i] = el }}
+              data-index={i}
+              className={cn(
+                "flex items-start gap-6 transition-all duration-700 ease-out",
+                isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0",
+                isLeft ? "flex-row" : "flex-row-reverse"
+              )}
+            >
+              {/* Card */}
+              <div className="w-3/4 rounded-2xl border border-white/6 bg-white/2 p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/4">
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <h3 className="text-base font-bold tracking-tight text-zinc-200">
+                      {item.title}
+                    </h3>
+                    <p className="mt-0.5 text-[13px] text-zinc-600">
+                      {item.subtitle}
+                    </p>
                   </div>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: "#3f3f46", letterSpacing: "0.06em" }}>
-                    {item.year}
+                  <span className="rounded-full border border-white/7 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
+                    {cfg.label}
                   </span>
                 </div>
 
-                {/* Card */}
-                <div style={{
-                  flex: 1,
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  borderRadius: 14,
-                  padding: "20px 24px",
-                }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>
-                    <div>
-                      <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: "#e4e4e7", letterSpacing: "-0.01em" }}>
-                        {item.title}
-                      </h3>
-                      <p style={{ margin: "2px 0 0", fontSize: 13, color: "#52525b" }}>
-                        {item.subtitle}
-                      </p>
-                    </div>
-                    <span style={{
-                      fontSize: 11, fontWeight: 500, letterSpacing: "0.08em",
-                      textTransform: "uppercase", color: "#52525b",
-                      border: "1px solid rgba(255,255,255,0.07)",
-                      padding: "3px 10px", borderRadius: 99, whiteSpace: "nowrap",
-                    }}>
-                      {cfg.label}
-                    </span>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-500">
+                  {item.description}
+                </p>
+
+                {item.tags && (
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/6 bg-white/3 px-2.5 py-0.5 text-[11px] font-medium text-zinc-500"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-
-                  <p style={{ margin: "10px 0 14px", fontSize: 14, color: "#71717a", lineHeight: 1.7 }}>
-                    {item.description}
-                  </p>
-
-                  {item.tags && (
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                      {item.tags.map((tag) => (
-                        <span key={tag} style={{
-                          fontSize: 11, color: "#52525b",
-                          background: "rgba(255,255,255,0.03)",
-                          border: "1px solid rgba(255,255,255,0.06)",
-                          borderRadius: 6, padding: "2px 9px", fontWeight: 500,
-                        }}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
-            )
-          })}
-        </div>
 
-        {/* End node */}
-        <div style={{
-          display: "flex", alignItems: "center", gap: 14,
-          paddingLeft: 12, marginTop: 8,
-          opacity: visibleItems.has(timelineData.length - 1) ? 1 : 0,
-          transition: "opacity 0.6s ease 0.5s",
-        }}>
-          <div style={{
-            width: 30, height: 30, borderRadius: "50%",
-            border: "1px solid rgba(255,255,255,0.1)",
-            background: "rgba(255,255,255,0.03)",
-            display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
-          }}>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#52525b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
+              {/* Year + icon */}
+              <div className={cn(
+                "flex w-1/4 shrink-0 flex-col gap-1 pt-5",
+                isLeft ? "items-start" : "items-end"
+              )}>
+                <span className="text-3xl font-bold tabular-nums tracking-tight text-zinc-300">
+                  {item.year}
+                </span>
+                <span className="text-lg">{cfg.icon}</span>
+              </div>
+            </div>
+          )
+        })}
+
+        {/* End */}
+        <div
+          className={cn(
+            "flex justify-center transition-all duration-700 delay-200",
+            visibleItems.has(timelineData.length - 1) ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+          )}
+        >
+          <div className="flex items-center gap-3">
+            <div className="flex size-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#52525b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <span className="text-xs font-medium text-zinc-600">
+              E a história continua...
+            </span>
           </div>
-          <span style={{ fontSize: 13, color: "#3f3f46", fontWeight: 500 }}>
-            E a história continua...
-          </span>
         </div>
       </div>
-
-      <style>{`
-        @keyframes pulse-ring {
-          0%   { transform: scale(1);   opacity: 0.35; }
-          100% { transform: scale(2.6); opacity: 0; }
-        }
-      `}</style>
     </section>
   )
 }
