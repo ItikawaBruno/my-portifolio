@@ -300,7 +300,7 @@ const FluxProjects = () => {
       <div className="mb-3 w-full max-w-5xl px-6 sm:px-10 md:px-16">
         <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-500">Projetos</h3>
       </div>
-      <Marquee pauseOnHover className="mb-8 [--duration:30s] [--gap:1.5rem]">
+      <Marquee pauseOnHover className="mb-8 [--duration:50s] [--gap:1.5rem]">
         {projects.map((project) => (
           <ProjectCard key={project.name} {...project} />
         ))}
@@ -310,7 +310,7 @@ const FluxProjects = () => {
       <div className="mb-3 w-full max-w-5xl px-6 sm:px-10 md:px-16">
         <h3 className="text-sm font-semibold uppercase tracking-widest text-zinc-500">Cursos</h3>
       </div>
-      <Marquee reverse pauseOnHover className="[--duration:30s] [--gap:1.5rem]">
+      <Marquee reverse pauseOnHover className="[--duration:50s] [--gap:1.5rem]">
         {courses.map((course) => (
           <CourseCard key={course.name} {...course} />
         ))}
