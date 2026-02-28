@@ -16,6 +16,14 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Bruno Hideki Itikawa — Dev Portfolio",
   description: "Portfólio de Bruno Hideki Itikawa — Desenvolvedor Backend Java, Fullstack e Data Science.",
+  icons: {
+    icon: [
+      { url: "/logo.png", sizes: "16x16", type: "image/png" },
+      { url: "/logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

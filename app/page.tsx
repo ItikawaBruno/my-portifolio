@@ -19,7 +19,7 @@ export default function Home() {
 
       {/* Hero */}
       <section id="hero" className="relative flex h-screen items-center justify-center overflow-hidden bg-black">
-        <ParticleNetwork />
+        <ParticleNetwork particleCount={140} connectionDistance={190} />
         <div className="pointer-events-none relative z-10">
           <TextTyping />
         </div>

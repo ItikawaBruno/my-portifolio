@@ -42,7 +42,7 @@ const timelineData: TimelineItem[] = [
     title: "Projeto VIVO — Onboarding",
     subtitle: "FIAP — Mar/2025 a Nov/2025",
     description: "Plataforma web de onboarding corporativo para a VIVO. API REST em Java (Spring Boot), front-end em Next.js, PostgreSQL, modelagem com Astah/tldraw e gerenciamento com Trello/GitHub.",
-    type: "personal",
+    type: "academic",
     tags: ["Java", "Spring Boot", "Next.js", "PostgreSQL"],
   },
   {
