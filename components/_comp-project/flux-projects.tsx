@@ -35,6 +35,14 @@ const projects = [
     tech: ["Java", "Spring Boot", "OpenFeign", "Eureka"],
   },
   {
+    name: "Future Makers — Iniciação Científica",
+    description:
+      "Modelo preditivo com Machine Learning, tratamento de dados e análise exploratória em Python.",
+    img: "https://avatar.vercel.sh/future-makers",
+    link: "https://github.com/ItikawaBruno/future-makers-python",
+    tech: ["Python", "Machine Learning", "NLP"],
+  },
+  {
     name: "MS Produto Validação",
     description:
       "Microsserviço de produtos com validação de dados e tratamento de exceções customizadas.",
@@ -94,10 +102,10 @@ const courses = [
     status: "Concluído",
   },
   {
-    name: "NumPy: Análise Numérica com Python",
+    name: "Pandas I/O: trabalhando com diferentes formatos de arquivos",
     description:
-      "Manipulação de arrays multidimensionais, operações vetorizadas, estatísticas e performance com NumPy.",
-    tech: ["Python", "NumPy"],
+      "Leitura e escrita de dados em CSV, Excel, JSON, Parquet e outros formatos com Pandas.",
+    tech: ["Python", "Pandas"],
     platform: "Alura",
     status: "Em andamento",
   },
