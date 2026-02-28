@@ -13,7 +13,7 @@ const TextTyping = () => {
       </h1>
       <div className="flex">
       <RotatingText
-        texts={['Desenvolvedor Backend Java', 'Desenvolvedor FullStack', 'Machine Learning Enthusiast', 'Cientista de Dados']}
+        texts={['Desenvolvedor Backend Java', 'Desenvolvedor FullStack', 'Analista de Dados']}
         mainClassName="px-2 sm:px-2 md:px-3 bg-zinc-300 text-zinc-700 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
         staggerFrom={"last"}
         initial={{ y: "100%" }}
