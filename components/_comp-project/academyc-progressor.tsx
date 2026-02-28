@@ -14,52 +14,44 @@ interface TimelineItem {
 
 const timelineData: TimelineItem[] = [
   {
-    year: "2019",
-    title: "Ensino Médio",
-    subtitle: "Colégio X",
-    description: "Início da jornada, onde a curiosidade por tecnologia começou a ganhar forma.",
-    type: "academic",
-    tags: ["Educação", "Base"],
-  },
-  {
-    year: "2021",
-    title: "Primeiro Projeto Pessoal",
-    subtitle: "Desenvolvimento Autônomo",
-    description: "Primeiros passos com código — sites estáticos, noites longas e muita descoberta.",
-    type: "personal",
-    tags: ["HTML", "CSS", "JS"],
-  },
-  {
-    year: "2022",
-    title: "Graduação em ADS",
-    subtitle: "Análise e Desenvolvimento de Sistemas",
-    description: "Ingresso na faculdade marcando o início formal da carreira em tecnologia.",
-    type: "academic",
-    tags: ["ADS", "Algoritmos", "BD"],
-  },
-  {
-    year: "2023",
-    title: "Primeiro Estágio",
-    subtitle: "Empresa de Software",
-    description: "Experiência real de mercado, metodologias ágeis e colaboração em equipe.",
-    type: "professional",
-    tags: ["React", "Node.js", "Scrum"],
-  },
-  {
     year: "2024",
-    title: "Dev Fullstack Jr.",
-    subtitle: "Posição Efetivada",
-    description: "Crescimento técnico acelerado e projetos com impacto direto em produção.",
-    type: "professional",
-    tags: ["Next.js", "TypeScript", "PostgreSQL"],
+    title: "Bacharelado em Sistemas de Informação",
+    subtitle: "FIAP — 2024 a 2027",
+    description: "Início da graduação com disciplinas em Java de Alta Performance, Banco de Dados SQL, Engenharia de Software, Arquitetura de Computadores, Cyber Security e Web Standards.",
+    type: "academic",
+    tags: ["Java", "SQL", "Eng. Software", "FIAP"],
   },
   {
     year: "2025",
-    title: "Projetos Open Source",
-    subtitle: "Comunidade & GitHub",
-    description: "Contribuições para a comunidade e construção de um portfólio sólido.",
+    title: "Iniciação Científica — ML",
+    subtitle: "FIAP — Predição de Ataques Web",
+    description: "Desenvolvimento de modelo preditivo de Machine Learning para identificação de ataques web, analisando padrões de requisições e comportamento de tráfego com Python.",
+    type: "academic",
+    tags: ["Python", "Machine Learning", "Data Science"],
+  },
+  {
+    year: "2025",
+    title: "Voluntário Backend — Sign Link",
+    subtitle: "Sign Link — Mar/2025 a Jun/2025",
+    description: "Desenvolvimento e integração de soluções com TypeScript, React e Nest.js. Reuniões em espanhol e inglês com equipes internacionais. Modelagem de dados, Figma, ClickUp e metodologias ágeis com Scrum.",
+    type: "professional",
+    tags: ["TypeScript", "Nest.js", "React", "Scrum"],
+  },
+  {
+    year: "2025",
+    title: "Projeto VIVO — Onboarding",
+    subtitle: "FIAP — Mar/2025 a Nov/2025",
+    description: "Plataforma web de onboarding corporativo para a VIVO. API REST em Java (Spring Boot), front-end em Next.js, PostgreSQL, modelagem com Astah/tldraw e gerenciamento com Trello/GitHub.",
     type: "personal",
-    tags: ["Open Source", "Portfolio", "UI/UX"],
+    tags: ["Java", "Spring Boot", "Next.js", "PostgreSQL"],
+  },
+  {
+    year: "2025",
+    title: "Estagiário Full Stack — 10X Digital",
+    subtitle: "10X Digital — Jul/2025 até o momento",
+    description: "Desenvolvimento de sistemas internos e soluções para empresas. Construção de plataforma de gestão para clínicas com Next.js, TypeScript, Prisma e PostgreSQL. Modelagem de dados, relatórios técnicos, integração de IA via APIs e versionamento com Git.",
+    type: "professional",
+    tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "AWS"],
   },
 ]
 
@@ -161,7 +153,7 @@ export default function ExperienceTimeline() {
                 <span className="text-3xl font-bold tabular-nums tracking-tight text-zinc-300">
                   {item.year}
                 </span>
-                <span className="text-lg">{cfg.icon}</span>
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-600">{cfg.label}</span>
               </div>
             </div>
           )

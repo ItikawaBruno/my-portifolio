@@ -2,6 +2,8 @@
 
 import React from "react"
 import { Dock, DockIcon } from "@/components/ui/dock"
+import ParticleNetwork from "@/components/_comp-project/particle-network"
+import { toast } from "sonner"
 
 type IconProps = React.HTMLAttributes<SVGElement>
 
@@ -88,20 +90,25 @@ const socialLinks = [
   },
   {
     name: "Email",
-    href: "mailto:bruno@email.com",
+    href: "mailto:bruno.itikawa@gmail.com",
     icon: EmailIcon,
+    copyValue: "bruno.itikawa@gmail.com",
+    toastMsg: "Email copiado!",
   },
   {
     name: "WhatsApp",
-    href: "https://wa.me/",
+    href: "https://wa.me/5511995077187",
     icon: WhatsAppIcon,
+    copyValue: "(11) 99507-7187",
+    toastMsg: "Número copiado!",
   },
 ]
 
 export default function FooterDock() {
   return (
-    <footer className="w-full border-t border-zinc-800 bg-zinc-950 py-10">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6">
+    <footer className="relative w-full overflow-hidden border-t border-zinc-800 bg-zinc-950 py-10">
+      <ParticleNetwork particleCount={40} connectionDistance={120} interactive={false} />
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center gap-6 px-6">
         <p className="text-sm text-zinc-500">Entre em contato</p>
 
         <Dock
@@ -117,6 +124,15 @@ export default function FooterDock() {
                 rel="noopener noreferrer"
                 aria-label={link.name}
                 className="flex h-full w-full items-center justify-center text-zinc-400 transition-colors hover:text-zinc-100"
+                onClick={(e) => {
+                  if (link.copyValue) {
+                    e.preventDefault()
+                    navigator.clipboard.writeText(link.copyValue)
+                    toast.success(link.toastMsg, {
+                      description: link.copyValue,
+                    })
+                  }
+                }}
               >
                 <link.icon className="size-full" />
               </a>

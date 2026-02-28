@@ -1,6 +1,6 @@
 
-import Spline from "@splinetool/react-spline/next";
 import TextTyping from "@/components/_comp-project/typing-animation";
+import ParticleNetwork from "@/components/_comp-project/particle-network";
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 import ExperienceTimeline from "@/components/_comp-project/academyc-progressor";
 import FluxProjects from "@/components/_comp-project/flux-projects";
@@ -8,17 +8,21 @@ import SkillsComp from "@/components/_comp-project/skills";
 import Navbar from "@/components/_comp-project/navbar";
 import FooterDock from "@/components/_comp-project/footer-dock";
 import ContactForm from "@/components/_comp-project/contact-form";
+import PageLoader from "@/components/_comp-project/page-loader";
 
 export default function Home() {
   return (
+    <PageLoader>
     <div className="relative min-h-screen w-full">
       <ScrollProgress className="bg-white" />
       <Navbar />
 
-      {/* Hero / Spline Background */}
-      <section id="hero">
-        <Spline scene="https://prod.spline.design/ag6bbUIBZELh10i5/scene.splinecode" />
-        <TextTyping />
+      {/* Hero */}
+      <section id="hero" className="relative flex h-screen items-center justify-center overflow-hidden bg-black">
+        <ParticleNetwork />
+        <div className="pointer-events-none relative z-10">
+          <TextTyping />
+        </div>
       </section>
 
       {/* Content */}
@@ -30,20 +34,13 @@ export default function Home() {
           </h2>
           <div className="space-y-4 text-base leading-relaxed text-zinc-400">
             <p>
-              Sou desenvolvedor com foco em <span className="text-zinc-200">Java</span> e ecossistema <span className="text-zinc-200">Spring</span>, com experiência real em
-              construção de APIs REST, microsserviços e mensageria com RabbitMQ. Também atuo no frontend com
-              <span className="text-zinc-200"> Next.js</span> e <span className="text-zinc-200">TypeScript</span>, criando sistemas internos completos para empresas — automação de processos,
-              integrações com IA e consumo de APIs externas.
+              Sou movido por desafios e aprendizado constante. Estudante de <span className="text-zinc-200">Sistemas de Informação</span> na <span className="text-zinc-200">FIAP</span>, encontrei na tecnologia um ambiente onde lógica, criatividade e estratégia se encontram.
             </p>
             <p>
-              Na área de dados, desenvolvi um modelo de <span className="text-zinc-200">Machine Learning</span> durante a iniciação científica para
-              predição de ataques web, classificando ameaças como SQL Injection e SSH brute-force com retorno de
-              probabilidade por categoria. Trabalho com <span className="text-zinc-200">Python</span>, NumPy, Pandas e análise estatística.
+              Comecei minha jornada focado em backend com <span className="text-zinc-200">Java</span> e <span className="text-zinc-200">Spring Boot</span>, desenvolvendo APIs e estudando arquitetura de microsserviços. Com o tempo, percebi que meu interesse ia além da construção de sistemas: queria entender como os dados por trás deles poderiam gerar inteligência e vantagem competitiva. Hoje, estudo <span className="text-zinc-200">dados</span>, <span className="text-zinc-200">automações</span> e <span className="text-zinc-200">modelos preditivos</span>, buscando evoluir para um perfil cada vez mais analítico e estratégico.
             </p>
             <p>
-              Tenho experiência com <span className="text-zinc-200">Docker</span> para containerização, <span className="text-zinc-200">AWS</span> (EC2, S3, RDS) em produção
-              e práticas de arquitetura — modelagem UML, versionamento com Git e organização ágil com Trello.
-              Atualmente cursando Análise e Desenvolvimento de Sistemas, sempre buscando evolução constante.
+              Fora da tecnologia, o esporte moldou quem eu sou. Joguei <span className="text-zinc-200">beisebol</span> por muitos anos e cheguei à <span className="text-zinc-200">seleção brasileira</span> duas vezes — uma experiência que me ensinou disciplina, consistência e mentalidade de alto desempenho. Atualmente, continuo praticando corrida e musculação, mantendo a mesma mentalidade de evolução contínua que aplico na tecnologia.
             </p>
           </div>
         </section>
@@ -69,5 +66,6 @@ export default function Home() {
         <FooterDock />
       </div>
     </div>
+    </PageLoader>
   );
 }

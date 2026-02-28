@@ -5,14 +5,13 @@ import RotatingText from "../RotatingText"
 
 const TextTyping = () => {
   return (
-    <div className="flex items-center justify-between px-20">
-      <h1 className="absolute top-80 left-50 text-5xl font-bold text-zinc-200">
-        <TypingAnimation duration={100} typeSpeed={100} delay={0}>
+    <div className="flex flex-col items-center gap-6">
+      <h1 className="text-5xl font-bold text-zinc-200">
+        <TypingAnimation duration={100} typeSpeed={100} deleteSpeed={50} delay={0} pauseDelay={2000} loop>
           Bruno Hideki Itikawa
         </TypingAnimation>
       </h1>
-      <div className="absolute top-100 left-50 flex">
-        <h3></h3>
+      <div className="flex">
       <RotatingText
         texts={['Desenvolvedor Backend Java', 'Desenvolvedor FullStack', 'Machine Learning Enthusiast', 'Cientista de Dados']}
         mainClassName="px-2 sm:px-2 md:px-3 bg-zinc-300 text-zinc-700 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
